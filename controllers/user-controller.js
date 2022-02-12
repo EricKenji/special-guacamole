@@ -14,7 +14,7 @@ const userController = {
 
     //get single user
     getUserById({ params }, res) {
-        User.findOne({ _id: params.id })
+        User.findOne({ _id: params.userId })
             .populate({
                 path: 'friends',
                 select: '-__v'
@@ -40,7 +40,7 @@ const userController = {
 
     //update user by id
     updateUser({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, { new:true })
+        User.findOneAndUpdate({ _id: params.userId }, body, { new:true })
             .then(dbUserData => {
                 if (!dbUserData) {
                 res.status(404).json({ message: 'No User found with this id!' });
@@ -53,7 +53,7 @@ const userController = {
 
     // delete user
     deleteUser({ params }, res) {
-        User.findOneAndDelete({ _id: params.id })
+        User.findOneAndDelete({ _id: params.userId })
             .then(dbUserData => res.json(dbUserData))
             .catch(err => res.json(err));
     }, 
@@ -61,9 +61,9 @@ const userController = {
     //add friend
     addFriend({ params }, res) {
         User.findOneAndUpdate(
-            { id:params.id },
+            { _id: params.userId },
             { $push: {friends: params.friendId }},
-            { new: true }
+            {new: true}
         )
         .then(dbUserData => {
             if (!dbUserData) {
@@ -78,8 +78,8 @@ const userController = {
     //delete friend
     deleteFriend({ params }, res) {
         User.findOneAndUpdate(
-            { id:params.id },
-            { $pull: {friends: params.friendId }},
+            { _id: params.userId },
+            { $pull: { friends: params.friendId }},
             { new: true }
         )
         .then(dbUserData => {
