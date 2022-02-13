@@ -12,7 +12,7 @@ To create a backend for a social network application.  I have done this by creat
 
 
 ## Walkthrough video URL
-https://watch.screencastify.com/v/7HOqE8n9dJZJZz6LdqMp
+https://watch.screencastify.com/v/TZmL7q8uNgqWIAfk8BaA
 
 ## Contribution
 Made by Eric
